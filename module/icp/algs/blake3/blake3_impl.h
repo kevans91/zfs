@@ -67,6 +67,12 @@ typedef struct {
 /* return selected BLAKE3 implementation ops */
 extern const blake3_ops_t *blake3_get_ops(void);
 
+#if defined(_MSC_VER)
+#define INLINE static __forceinline
+#else
+#define INLINE static inline __attribute__((always_inline))
+#endif
+
 #if defined(__x86_64)
 #define	MAX_SIMD_DEGREE 16
 #else

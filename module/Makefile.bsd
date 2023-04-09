@@ -15,11 +15,9 @@ KMOD=	openzfs
 	${SRCDIR}/icp/algs/blake3 \
 	${SRCDIR}/icp/algs/edonr \
 	${SRCDIR}/icp/algs/sha2 \
-	${SRCDIR}/icp/asm-aarch64/blake3 \
 	${SRCDIR}/icp/asm-aarch64/sha2 \
 	${SRCDIR}/icp/asm-arm/sha2 \
 	${SRCDIR}/icp/asm-ppc64/sha2 \
-	${SRCDIR}/icp/asm-ppc64/blake3 \
 	${SRCDIR}/icp/asm-x86_64/blake3 \
 	${SRCDIR}/icp/asm-x86_64/sha2 \
 	${SRCDIR}/os/freebsd/spl \
@@ -33,6 +31,7 @@ KMOD=	openzfs
 	${SRCDIR}/zstd/lib/decompress
 
 CFLAGS+= -I${INCDIR}
+CFLAGS+= -I${SRCDIR}/../contrib/simde
 CFLAGS+= -I${SRCDIR}/icp/include
 CFLAGS+= -I${INCDIR}/os/freebsd
 CFLAGS+= -I${INCDIR}/os/freebsd/spl
@@ -91,21 +90,13 @@ SRCS+=	edonr.c
 #icp/algs/blake3
 SRCS+=	blake3.c \
 	blake3_generic.c \
-	blake3_impl.c
-
-#icp/asm-aarch64/blake3
-SRCS+=	b3_aarch64_sse2.S \
-	b3_aarch64_sse41.S
-
-#icp/asm-ppc64/blake3
-SRCS+=	b3_ppc64le_sse2.S \
-	b3_ppc64le_sse41.S
+	blake3_impl.c \
+	blake3_sse2.c \
+	blake3_sse41.c
 
 #icp/asm-x86_64/blake3
 SRCS+=	blake3_avx2.S \
 	blake3_avx512.S \
-	blake3_sse2.S \
-	blake3_sse41.S
 
 #icp/algs/sha2
 SRCS+=	sha2_generic.c \
@@ -407,6 +398,8 @@ CFLAGS.gcc+= -Wno-pointer-to-int-cast
 
 CFLAGS.abd.c= -Wno-cast-qual
 CFLAGS.ddt.c= -Wno-cast-qual
+CFLAGS.blake3_sse2.c= -Wno-cast-qual -Wno-missing-prototypes
+CFLAGS.blake3_sse41.c= -Wno-cast-qual -Wno-missing-prototypes
 CFLAGS.dmu.c= -Wno-cast-qual
 CFLAGS.dmu_traverse.c= -Wno-cast-qual
 CFLAGS.dnode.c= ${NO_WUNUSED_BUT_SET_VARIABLE}

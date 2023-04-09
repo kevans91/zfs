@@ -34,15 +34,15 @@
 	(defined(__x86_64) && defined(HAVE_SSE2)) || \
 	(defined(__PPC64__) && defined(__LITTLE_ENDIAN__))
 
-extern void ASMABI zfs_blake3_compress_in_place_sse2(uint32_t cv[8],
+extern void zfs_blake3_compress_in_place_sse2(uint32_t cv[8],
     const uint8_t block[BLAKE3_BLOCK_LEN], uint8_t block_len,
     uint64_t counter, uint8_t flags);
 
-extern void ASMABI zfs_blake3_compress_xof_sse2(const uint32_t cv[8],
+extern void zfs_blake3_compress_xof_sse2(const uint32_t cv[8],
     const uint8_t block[BLAKE3_BLOCK_LEN], uint8_t block_len,
     uint64_t counter, uint8_t flags, uint8_t out[64]);
 
-extern void ASMABI zfs_blake3_hash_many_sse2(const uint8_t * const *inputs,
+extern void zfs_blake3_hash_many_sse2(const uint8_t * const *inputs,
     size_t num_inputs, size_t blocks, const uint32_t key[8],
     uint64_t counter, boolean_t increment_counter, uint8_t flags,
     uint8_t flags_start, uint8_t flags_end, uint8_t *out);
@@ -100,15 +100,15 @@ const blake3_ops_t blake3_sse2_impl = {
 	(defined(__x86_64) && defined(HAVE_SSE2)) || \
 	(defined(__PPC64__) && defined(__LITTLE_ENDIAN__))
 
-extern void ASMABI zfs_blake3_compress_in_place_sse41(uint32_t cv[8],
+extern void zfs_blake3_compress_in_place_sse41(uint32_t cv[8],
     const uint8_t block[BLAKE3_BLOCK_LEN], uint8_t block_len,
     uint64_t counter, uint8_t flags);
 
-extern void ASMABI zfs_blake3_compress_xof_sse41(const uint32_t cv[8],
+extern void zfs_blake3_compress_xof_sse41(const uint32_t cv[8],
     const uint8_t block[BLAKE3_BLOCK_LEN], uint8_t block_len,
     uint64_t counter, uint8_t flags, uint8_t out[64]);
 
-extern void ASMABI zfs_blake3_hash_many_sse41(const uint8_t * const *inputs,
+extern void zfs_blake3_hash_many_sse41(const uint8_t * const *inputs,
     size_t num_inputs, size_t blocks, const uint32_t key[8],
     uint64_t counter, boolean_t increment_counter, uint8_t flags,
     uint8_t flags_start, uint8_t flags_end, uint8_t *out);
